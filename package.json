@@ -1,13 +1,12 @@
 {
   "name": "learning-at-zju-helper",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "学在浙大/智云课堂 辅助脚本",
   "main": "src/index.js",
   "scripts": {
     "flow": "flow",
-    "build": "webpack --config webpack.config.js --mode production && node build.js && node build-docs.js",
-    "dev": "node build.js && webpack --config webpack.config.js --mode development --watch",
-    "docs:build": "node build-docs.js"
+    "build": "webpack --config webpack.config.js --mode production && node build.js",
+    "dev": "node build.js && webpack --config webpack.config.js --mode development --watch"
   },
   "author": "memset0",
   "license": "MIT",
