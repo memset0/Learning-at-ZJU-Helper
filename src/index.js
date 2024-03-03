@@ -4,6 +4,16 @@ import { isVideoPage } from './utils/checker.js';
 import { copyToClipboard } from './utils/browser.js';
 
 class App {
+  getNamespace() {
+    const hostname = location.hostname;
+
+    if (hostname === 'courses.zju.edu.cn') {
+      return '学在浙大';
+    } else if (hostname === 'classroom.zju.edu.cn' || hostname === 'livingroom.cmc.zju.edu.cn' || hostname === 'onlineroom.cmc.zju.edu.cn' || hostname === 'interactivemeta.cmc.zju.edu.cn') {
+      return '智云课堂';
+    }
+  }
+
   constructor() {
     this.plugins = {};
     const pluginLoader = require.context('./plugins', true, /\/index\.js$/);
@@ -19,6 +29,7 @@ class App {
 
   async load() {
     const context = {
+      namespace: this.getNamespace(),
       logger,
       clipboard: {
         copy: copyToClipboard,
