@@ -24,7 +24,7 @@ function generateHeader(devlopment = false) {
     if (!Object.keys(data).includes('require')) {
       data.require = [];
     }
-    data.name += ' (DEV)';
+    data.name = '[DEV] ' + data.name;
     data.require.push('file:///' + path.resolve(__dirname, 'dist', 'bundle.js').replace(/\\/g, '/'));
   }
 
