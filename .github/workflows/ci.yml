@@ -36,6 +36,10 @@ jobs:
           npm ci
           npm run build
 
+      - name: Copy lib
+        run: |
+          cp -r lib/ dist/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
