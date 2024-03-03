@@ -14,6 +14,21 @@ class App {
     }
   }
 
+  loadScript(link) {
+    if (this.loadedScripts.includes(link)) {
+      return;
+    }
+    this.loadedScripts.push(link);
+    logger.debug(link, GM_getResourceText);
+    const script = GM_getResourceText(link);
+    if (script === null) {
+      logger.error(`脚本 ${link} 加载失败`);
+    } else {
+      logger.debug(script);
+      unsafeWindow.eval(script);
+    }
+  }
+
   constructor() {
     this.plugins = {};
     const pluginLoader = require.context('./plugins', true, /\/index\.js$/);
@@ -25,6 +40,8 @@ class App {
       this.plugins[slug] = pluginLoader(filename);
       this.plugins[slug].slug = slug;
     });
+
+    this.loadedScripts = [];
   }
 
   async load() {
@@ -37,6 +54,7 @@ class App {
       window: unsafeWindow,
       document: unsafeWindow.document,
       env: { isVideoPage: isVideoPage() },
+      loadScript: (link) => this.loadScript(link),
     };
     const extendContext = (data) => {
       for (const key in data) {

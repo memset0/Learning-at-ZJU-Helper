@@ -1,10 +1,9 @@
 {
   "name": "learning-at-zju-helper",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "学在浙大/智云课堂 辅助脚本",
   "main": "src/index.js",
   "scripts": {
-    "flow": "flow",
     "build": "webpack --config webpack.config.js --mode production && node build.js",
     "dev": "node build.js && webpack --config webpack.config.js --mode development --watch"
   },
@@ -15,7 +14,6 @@
     "css-loader": "^6.10.0",
     "file-saver": "^2.0.5",
     "js-beautify": "^1.15.1",
-    "jszip": "^3.9.1",
     "less-loader": "^12.2.0",
     "less-plugin-clean-css": "^1.5.1",
     "loader-utils": "^3.2.1",
@@ -23,8 +21,5 @@
     "style-loader": "^3.3.4",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4"
-  },
-  "devDependencies": {
-    "flow-bin": "^0.229.2"
   }
 }

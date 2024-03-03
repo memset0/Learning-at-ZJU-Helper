@@ -1,4 +1,3 @@
-import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { limitConcurrency } from '../../utils/global';
 import { printToPdf } from '../../utils/browser.js';
@@ -29,7 +28,7 @@ export function check({ elements }) {
   return getPPTList(elements).length > 0;
 }
 
-export function load({ logger, elements, addButton }, options) {
+export function load({ logger, elements, addButton, loadScript }, options) {
   let pptList = getPPTList(elements)
     .map((item) => {
       // Convert vue object to normal object
@@ -53,6 +52,7 @@ export function load({ logger, elements, addButton }, options) {
 
   addButton(1.1, '打包下载', async ({ setStatus }) => {
     setStatus('加载JSZip库');
+    loadScript('jszip.min.js');
     const zip = new JSZip();
 
     let counter = 0;
@@ -95,7 +95,7 @@ export function load({ logger, elements, addButton }, options) {
       8
     );
 
-    setStatus('生成PDF');
+    setStatus('生成PDF中');
     for (const image of imageList) {
       html += `<div class="page"><img src="${image}" /></div>`;
     }
