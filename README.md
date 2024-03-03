@@ -1,6 +1,6 @@
 # Learning-at-ZJU-Helper
 
-学在浙大/智云课堂 辅助脚本
+学在浙大/智云课堂的辅助脚本，请配合 Tampermonkey 等脚本加载器使用。下载地址：[Github Pages](https://memset0.github.io/Learning-at-ZJU-Helper/user.js)。
 
 目前脚本正在开发中，欢迎关注...
 
