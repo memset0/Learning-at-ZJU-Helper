@@ -30,12 +30,6 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy artifact to Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: main
-          folder: .
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
