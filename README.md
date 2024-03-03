@@ -1,6 +1,6 @@
 # Learning-at-ZJU-Helper
 
-学在浙大/智云课堂的辅助脚本，请配合 Tampermonkey 等脚本加载器使用。下载地址：[Github Pages](https://memset0.github.io/Learning-at-ZJU-Helper/user.js)。
+学在浙大/智云课堂的辅助脚本，请配合 Tampermonkey 等脚本加载器使用。[通过 Greasy Fork 安装](https://greasyfork.org/zh-CN/scripts/488869-%E5%AD%A6%E5%9C%A8%E6%B5%99%E5%A4%A7-%E6%99%BA%E4%BA%91%E8%AF%BE%E5%A0%82-%E8%BE%85%E5%8A%A9%E8%84%9A%E6%9C%AC)。
 
 目前脚本正在开发中，欢迎关注...
 

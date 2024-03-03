@@ -7,5 +7,8 @@
   "match": ["*://livingroom.cmc.zju.edu.cn/*", "*://onlineroom.cmc.zju.edu.cn/*", "*://classroom.zju.edu.cn/*", "*://interactivemeta.cmc.zju.edu.cn/*"],
   "grant": ["unsafeWindow", "GM_setValue", "GM_getValue", "GM_addValueChangeListener", "GM_removeValueChangeListener"],
   "require": [],
-  "run-at": "document-start"
+  "encoding": "utf-8",
+  "run-at": "document-start",
+  "downloadURL": "https://update.greasyfork.org/scripts/488869/%E5%AD%A6%E5%9C%A8%E6%B5%99%E5%A4%A7%E6%99%BA%E4%BA%91%E8%AF%BE%E5%A0%82%20%E8%BE%85%E5%8A%A9%E8%84%9A%E6%9C%AC.user.js",
+  "updateURL": "https://update.greasyfork.org/scripts/488869/%E5%AD%A6%E5%9C%A8%E6%B5%99%E5%A4%A7%E6%99%BA%E4%BA%91%E8%AF%BE%E5%A0%82%20%E8%BE%85%E5%8A%A9%E8%84%9A%E6%9C%AC.meta.js"
 }
