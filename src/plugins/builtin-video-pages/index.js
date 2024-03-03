@@ -32,10 +32,10 @@ export function load({ logger, document, extendContext }) {
   require('./style.less');
 
   const elements = getElements({ document });
+  logger.debug('视频页面元素:', elements);
   extendContext({ elements });
 
   const $wrapper = elements.wrapper;
-
   const $btn_group = document.createElement('div');
   $btn_group.className = 'mem-btn-group';
   $wrapper.insertBefore($btn_group, $wrapper.firstChild);
@@ -45,8 +45,22 @@ export function load({ logger, document, extendContext }) {
     const $btn = document.createElement('button');
     $btn.className = 'mem-btn mem-btn-primary';
     $btn.textContent = text;
-    $btn.onclick = callback;
+    $btn.style = 'display: inline-block';
     $btn.setAttribute('data-key', key);
+
+    $btn.onclick = () => {
+      callback({
+        element: $btn,
+        setStatus: (status) => {
+          logger.debug('(button)' + text, 'set status:', status);
+          if (status) {
+            $btn.innerText = text + '(' + status + ')';
+          } else {
+            $btn.innerText = text;
+          }
+        },
+      });
+    };
 
     for (const $current of $btn_group.children) {
       // 保持 data-key 有序

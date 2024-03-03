@@ -4,23 +4,17 @@ import { isVideoPage } from './utils/checker.js';
 import { copyToClipboard } from './utils/clipboard.js';
 
 class App {
-  _load_plugins() {
-    // const pluginList = [require('./plugins/builtin-video-pages/index.js'), require('./plugins/focus-mode/index.js'), require('./plugins/download-video/index.js')];
-    const pluginContext = require.context('./plugins', true, /\/index\.js$/);
-    const plugins = {};
-    pluginContext.keys().forEach((filename) => {
+  constructor() {
+    this.plugins = {};
+    const pluginLoader = require.context('./plugins', true, /\/index\.js$/);
+    pluginLoader.keys().forEach((filename) => {
       const slug = filename.slice(2, -9);
       if (slug === 'example-plugin') {
         return; // 示例插件将不会被加载
       }
-      plugins[slug] = pluginContext(filename);
-      plugins[slug].slug = slug;
+      this.plugins[slug] = pluginLoader(filename);
+      this.plugins[slug].slug = slug;
     });
-    return plugins;
-  }
-
-  constructor() {
-    this.plugins = this._load_plugins();
   }
 
   async load() {
@@ -51,24 +45,13 @@ class App {
       }
       return true;
     };
+
     logger.debug('开始加载插件', this.plugins);
+    let retryTimes = 0;
     do {
       for (const slug in this.plugins) {
         const plugin = this.plugins[slug];
         if (!plugin.loaded) {
-          if (plugin.skip instanceof Function) {
-            if (await plugin.skip(context)) {
-              plugin.loaded = true;
-              plugin.skipped = true;
-              logger.debug(`跳过加载 ${plugin.slug} 插件`);
-              continue;
-            }
-          }
-          if (plugin.check instanceof Function) {
-            if (!(await plugin.check(context))) {
-              continue;
-            }
-          }
           if (plugin.required && plugin.required instanceof Array && plugin.required.length > 0) {
             let status = 'ok';
             for (const required of plugin.required) {
@@ -89,6 +72,19 @@ class App {
               continue;
             }
           }
+          if (plugin.skip instanceof Function) {
+            if (await plugin.skip(context)) {
+              plugin.loaded = true;
+              plugin.skipped = true;
+              logger.debug(`跳过加载 ${plugin.slug} 插件`);
+              continue;
+            }
+          }
+          if (plugin.check instanceof Function) {
+            if (!(await plugin.check(context))) {
+              continue;
+            }
+          }
           await plugin.load({
             ...context,
           });
@@ -96,7 +92,7 @@ class App {
         }
       }
       await sleep(100);
-    } while (!isQueueCleaned());
+    } while (!isQueueCleaned() && ++retryTimes < 129);
     logger.info('插件加载完成!');
   }
 

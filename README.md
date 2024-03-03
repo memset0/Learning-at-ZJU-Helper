@@ -11,6 +11,17 @@
 
 ## 功能列表
 
+### 课件下载 [`download-ppt`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-ppt)
+
+下载智云课堂自动生成的课件，支持配置最小间隔时间，还支持多种下载方式：
+
+- 合并成 PDF 下载 (TBD)
+
+- zip 打包下载
+  ![](https://static.memset0.cn/img/v6/2024/03/03/uEUzlIZR.png)
+
+
+
 ### 视频链接解析 [`download-video`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-video)
 
 添加视频解析按钮，点击后自动复制视频连接到剪贴板，可以直接下载。直播也能使用，但需要在流媒体播放器中打开。
@@ -24,5 +35,5 @@
 如果需要使用被屏蔽的组件，到设置中关闭本功能即可。
 
 
-> 以上功能介绍基于版本 1.1.2 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
+> 以上功能介绍基于版本 1.1.3 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 

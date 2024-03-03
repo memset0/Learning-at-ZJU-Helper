@@ -17,7 +17,7 @@ export function load({ logger, clipboard, elements, addButton }) {
     }
   }
 
-  const $btn = addButton(0, '解析链接', () => {
+  addButton(2, '解析链接', ({ setStatus }) => {
     const url = getUrl();
     if (!url) {
       alert('获取视频地址失败，请待播放器完全加载后再试。');
@@ -25,9 +25,9 @@ export function load({ logger, clipboard, elements, addButton }) {
     }
     logger.info('视频链接:', url);
     clipboard.copy(url);
-    $btn.innerText = '解析链接(已拷贝)';
+    setStatus('已拷贝');
     setTimeout(() => {
-      $btn.innerText = '解析链接';
+      setStatus(null);
     }, 500);
   });
 }
