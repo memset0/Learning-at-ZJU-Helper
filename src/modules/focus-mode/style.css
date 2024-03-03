@@ -1,0 +1,56 @@
+.custom-footer, /* 页脚 */
+.feedback-wrapper, /* 问题反馈 */
+.menu-content > .first-menu:nth-child(4), /* 顶栏：学路（注意：在智云课堂更新时元素位置可能被改变） */
+.menu-content > .first-menu:nth-child(5), /* 顶栏：知识图谱（注意：在智云课堂更新时元素位置可能被改变） */
+.hot-recommend-wrapper, /* 视频页：猜你喜欢 */
+__nothing__ {
+  display: none !important;
+}
+
+__nothing__ {
+  opacity: 0 !important;
+  pointer-events: none; /* 避免鼠标不小心点到上面的链接 */
+  cursor: default;
+}
+
+/* ---- 避免删除页脚后页面内容直接贴底 ----- */
+.living-page-wrapper {
+  padding-bottom: 20.040129px; /* Magic Number */
+}
+
+/* ---- 顶栏删除不好看的白线 ----- */
+.course-filter-searchAll-custom {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* ---- 视频页：屏蔽收藏点赞按钮 ----- */
+.operate_wrap > .collect_span, /* 视频页：收藏 */
+.operate_wrap > .good_span /* 视频页：点赞 */ {
+  display: none !important;
+}
+
+/* ---- 视频页：侧边的三个按钮删除渐变背景 ----- */
+.side_tab_wrap .side_tab {
+  background: #f9f9f9 !important;
+  /* border: solid 1px black !important; */
+  transform: none !important;
+  color: #a0a0a0 !important;
+}
+.side_tab_wrap .side_tab span {
+  transform: none !important;
+}
+.side_tab_wrap .side_tab.active span {
+  color: #144aea !important;
+  font-weight: bold !important;
+}
+
+/* ---- 视频页：相关信息部分屏蔽右栏 ----- */
+.relative-info-gap,
+.relative-info-right {
+  display: none;
+}
+
+.relative-info-left {
+  width: 100% !important;
+}

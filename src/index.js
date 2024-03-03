@@ -1,1 +1,5 @@
-console.log('Hello, World!');
+const modules = {
+  focusMode: require('./modules/focus-mode/index.js'),
+};
+
+modules.focusMode.run();
