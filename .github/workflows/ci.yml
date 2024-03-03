@@ -27,7 +27,7 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy artifact to Pages
+      - name: Deploy artifacts to Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main
