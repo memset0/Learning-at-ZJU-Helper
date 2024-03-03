@@ -5,11 +5,17 @@ import { copyToClipboard } from './utils/clipboard.js';
 
 class App {
   _load_plugins() {
-    const pluginList = [require('./plugins/builtin-video-pages/index.js'), require('./plugins/focus-mode/index.js'), require('./plugins/download-video/index.js')];
+    // const pluginList = [require('./plugins/builtin-video-pages/index.js'), require('./plugins/focus-mode/index.js'), require('./plugins/download-video/index.js')];
+    const pluginContext = require.context('./plugins', true, /\/index\.js$/);
     const plugins = {};
-    for (const plugin of pluginList) {
-      plugins[plugin.name] = plugin;
-    }
+    pluginContext.keys().forEach((filename) => {
+      const slug = filename.slice(2, -9);
+      if (slug === 'example-plugin') {
+        return; // 示例插件将不会被加载
+      }
+      plugins[slug] = pluginContext(filename);
+      plugins[slug].slug = slug;
+    });
     return plugins;
   }
 
@@ -39,22 +45,22 @@ class App {
     context.extendContext = extendContext;
 
     const isQueueCleaned = () => {
-      for (const pluginName in this.plugins) {
-        const plugin = this.plugins[pluginName];
+      for (const slug in this.plugins) {
+        const plugin = this.plugins[slug];
         if (!plugin.loaded) return false;
       }
       return true;
     };
     logger.debug('开始加载插件', this.plugins);
     do {
-      for (const pluginName in this.plugins) {
-        const plugin = this.plugins[pluginName];
+      for (const slug in this.plugins) {
+        const plugin = this.plugins[slug];
         if (!plugin.loaded) {
           if (plugin.skip instanceof Function) {
             if (await plugin.skip(context)) {
               plugin.loaded = true;
               plugin.skipped = true;
-              logger.debug(`跳过加载 ${plugin.name} 插件`);
+              logger.debug(`跳过加载 ${plugin.slug} 插件`);
               continue;
             }
           }
@@ -77,7 +83,7 @@ class App {
             if (status === 'skip') {
               plugin.loaded = true;
               plugin.skipped = true;
-              logger.debug(`跳过加载 ${plugin.name} 插件，因为他的前置插件被跳过`);
+              logger.debug(`跳过加载 ${plugin.slug} 插件，因为前置插件被跳过`);
               continue;
             } else if (status === 'wait') {
               continue;

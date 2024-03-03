@@ -1,5 +1,4 @@
-export const name = 'example-plugin';
-export const fullname = '示例插件';
+export const name = '示例插件';
 export const description = '这是一个示例插件，他不应该被加载到脚本中。';
 
 export const required = []; // 前置要求：在列出的插件都被加载后才会加载，如果某个前置插件被跳过那么本插件也会跳过

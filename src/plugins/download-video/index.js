@@ -1,5 +1,4 @@
-export const name = 'download-video';
-export const fullname = '视频链接解析';
+export const name = '视频链接解析';
 export const required = ['builtin-video-pages'];
 
 export function load({ logger, clipboard, elements, addButton }) {

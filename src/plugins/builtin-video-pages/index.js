@@ -1,7 +1,6 @@
 import { isVueReady } from '../../utils/vue.js';
 
-export const name = 'builtin-video-pages';
-export const fullname = '[builtin]视频页面前置';
+export const name = '[builtin]视频页面前置';
 
 export function skip({ env }) {
   return !env.isVideoPage;
