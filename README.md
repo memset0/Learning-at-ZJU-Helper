@@ -7,9 +7,9 @@
 - 良好封装的代码，您可以在 `./src/plugins/` 中编写并贡献你的插件，并获得通过上下文提供的已有工具链。参见 [示例插件](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/example-plugin)。
 - 由于我没有在北教/蒙民伟楼的课程，对北教智云的支持可能会不完善，欢迎同学们补充。
 
-## 所有功能
-
 <!-- The following content is auto-generated, please do not modify directly. -->
+
+## Features <small>`ver: 1.1.2`</small>
 
 ### 视频链接解析 [`download-video`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-video)
 

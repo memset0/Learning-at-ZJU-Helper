@@ -15,7 +15,7 @@ if (fs.existsSync(path.join(__dirname, 'dist', 'bundle.js'))) {
   fs.writeFileSync(path.join(__dirname, 'dist', 'user.format.js'), beautify(userjs, { indent_with_tabs: true }));
 }
 
-updateReadme();
+updateReadme(packageJSON.version);
 
 function generateHeader(devlopment = false) {
   const data = {
@@ -55,11 +55,13 @@ function generateHeader(devlopment = false) {
   return header;
 }
 
-function updateReadme() {
+function updateReadme(version) {
   const SEPARATOR = '<!-- The following content is auto-generated, please do not modify directly. -->';
 
   let [readme, _] = fs.readFileSync(path.join(__dirname, 'README.md'), 'utf-8').toString().split(SEPARATOR);
   readme += SEPARATOR + '\n\n';
+
+  readme += `## Features <small>\`ver: ${version}\`</small>\n\n`;
 
   const plugins = fs.readdirSync(path.join(__dirname, 'src/plugins'));
   for (const plugin of plugins) {
