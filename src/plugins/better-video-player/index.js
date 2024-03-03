@@ -21,8 +21,8 @@ export function check({ document }) {
 export async function load({ logger, document, elements, addButton }) {
   require('./style.less');
 
-  async function toggle() {
-    document.body.classList.toggle('better-video-player');
+  async function toggleFullscreen() {
+    document.body.classList.toggle('mem-bvt-fullscreen');
     await sleep(100);
     elements.playerVue.resizePlayer();
   }
@@ -32,7 +32,7 @@ export async function load({ logger, document, elements, addButton }) {
   const $button = document.createElement('div');
   $button.className = 'mem-bvp-btn';
   $button.innerText = '网页全屏';
-  $button.onclick = () => toggle();
+  $button.onclick = () => toggleFullscreen();
   $wrapper.insertBefore($button, $wrapper.firstChild);
   logger.debug('wrapper', $wrapper, $button);
 }
