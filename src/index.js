@@ -1,6 +1,7 @@
 import logger from './utils/logger.js';
 import { sleep } from './utils/global.js';
 import { isVideoPage } from './utils/checker.js';
+import { copyToClipboard } from './utils/clipboard.js';
 
 class App {
   _load_plugins() {
@@ -19,6 +20,9 @@ class App {
   async load() {
     const context = {
       logger,
+      clipboard: {
+        copy: copyToClipboard,
+      },
       window: unsafeWindow,
       document: unsafeWindow.document,
       env: { isVideoPage: isVideoPage() },
@@ -47,7 +51,7 @@ class App {
         const plugin = this.plugins[pluginName];
         if (!plugin.loaded) {
           if (plugin.skip instanceof Function) {
-            if (plugin.skip(context)) {
+            if (await plugin.skip(context)) {
               plugin.loaded = true;
               plugin.skipped = true;
               logger.debug(`跳过加载 ${plugin.name} 插件`);
@@ -55,14 +59,13 @@ class App {
             }
           }
           if (plugin.check instanceof Function) {
-            if (!plugin.check(context)) {
+            if (!(await plugin.check(context))) {
               continue;
             }
           }
           if (plugin.required && plugin.required instanceof Array && plugin.required.length > 0) {
             let status = 'ok';
             for (const required of plugin.required) {
-              console.log(required);
               if (this.plugins[required].skipped) {
                 status = 'skip';
                 break;
@@ -80,7 +83,7 @@ class App {
               continue;
             }
           }
-          plugin.load({
+          await plugin.load({
             ...context,
           });
           plugin.loaded = true;

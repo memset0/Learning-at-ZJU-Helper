@@ -1,0 +1,44 @@
+.mem-btn {
+  border: none;
+
+  /* 以下按钮代码从 .operate_wrap .QRcode_span 的样式中拷贝而来 */
+
+  display: flex;
+  margin-left: 16px;
+  cursor: pointer;
+  height: 32px;
+  line-height: 32px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  border-radius: 4px;
+  background-color: #f0f1f3;
+  font-size: 14px;
+  color: #144aea;
+  text-align: center;
+  position: relative;
+
+  padding: 0 6px;
+}
+
+@media screen and (max-width: 1679px) {
+  .mem-btn {
+    margin-left: 11.42856px;
+    height: 22.85712px;
+    line-height: 22.85712px;
+    font-size: 9.99999px;
+  }
+}
+
+@media screen and (min-width: 1680px) and (max-width: 1919px) {
+  .mem-btn {
+    margin-left: 14px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12.25px;
+  }
+}
