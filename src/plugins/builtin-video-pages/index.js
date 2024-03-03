@@ -30,7 +30,7 @@ export function check({ document }) {
 }
 
 export function load({ logger, document, extendContext }) {
-  require('./style.css');
+  require('./style.less');
 
   const elements = getElements({ document });
   extendContext({ elements });

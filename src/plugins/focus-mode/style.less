@@ -13,30 +13,30 @@ __nothing__ {
   cursor: default;
 }
 
-/* ---- 避免删除页脚后页面内容直接贴底 ----- */
+// ===== 避免删除页脚后页面内容直接贴底 =====
 .living-page-wrapper {
   padding-bottom: 20.040129px; /* Magic Number */
 }
 
-/* ---- 顶栏删除不好看的白线 ----- */
+// ===== 顶栏删除不好看的白线 =====
 .course-filter-searchAll-custom {
   border-left: none !important;
   border-right: none !important;
 }
 
-/* ---- 视频页：屏蔽收藏点赞按钮 ----- */
+// ===== 视频页：屏蔽收藏点赞按钮 =====
 .operate_wrap > .collect_span, /* 视频页：收藏 */
 .operate_wrap > .good_span, /* 视频页：点赞 */ 
 .collect > .collect_span, /* 视频页：收藏 */
 .collect > .good_span /* 视频页：点赞 */ {
-  /* 把这两条单独提出来是想记录一下为什么要屏蔽这两个按钮：因为看了一下智云课堂上收藏最多的课程也就一百多次，相信绝大部分人都用不到这个功能。且一门课程只能点赞一次，实在想点赞禁用本脚本后点赞也可。 */
+  // 把这两条单独提出来是想记录一下为什么要屏蔽这两个按钮：因为看了一下智云课堂上收藏最多的课程也就一百多次，相信绝大部分人都用不到这个功能。且一门课程只能点赞一次，实在想点赞禁用本脚本后点赞也可。 */
   display: none !important;
 }
 
-/* ---- 视频页：侧边的三个按钮删除渐变背景 ----- */
+// ===== 视频页：侧边的三个按钮删除渐变背景 =====
 .side_tab_wrap .side_tab {
   background: #f9f9f9 !important;
-  /* border: solid 1px black !important; */
+  // border: solid 1px black !important;
   transform: none !important;
   color: #a0a0a0 !important;
 }
@@ -48,7 +48,7 @@ __nothing__ {
   font-weight: bold !important;
 }
 
-/* ---- 视频页：相关信息部分屏蔽右栏 ----- */
+// ===== 视频页：相关信息部分屏蔽右栏 =====
 .relative-info-gap,
 .relative-info-right {
   display: none;

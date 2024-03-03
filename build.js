@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const beautify = require('js-beautify/js').js;
 
 const packageJSON = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf8'));
 
@@ -7,9 +8,11 @@ if (!fs.existsSync(path.join(__dirname, 'dist'))) {
   fs.mkdirSync(path.join(__dirname, 'dist'));
 }
 
-fs.writeFileSync(path.join(__dirname, 'dist', 'dev.user.js'), generateHeader(true));
+fs.writeFileSync(path.join(__dirname, 'dist', 'user.dev.js'), generateHeader(true));
 if (fs.existsSync(path.join(__dirname, 'dist', 'bundle.js'))) {
-  fs.writeFileSync(path.join(__dirname, 'dist', 'user.js'), generateHeader(false) + fs.readFileSync(path.join(__dirname, 'dist', 'bundle.js'), 'utf-8').toString());
+  const userjs = generateHeader(false) + fs.readFileSync(path.join(__dirname, 'dist', 'bundle.js'), 'utf-8').toString();
+  fs.writeFileSync(path.join(__dirname, 'dist', 'user.js'), userjs);
+  fs.writeFileSync(path.join(__dirname, 'dist', 'user.format.js'), beautify(userjs, { indent_with_tabs: true }));
 }
 
 function generateHeader(devlopment = false) {
