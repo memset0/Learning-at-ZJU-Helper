@@ -5,8 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "flow": "flow",
-    "build": "webpack --config webpack.config.js --mode production && node build.js",
-    "dev": "node build.js && webpack --config webpack.config.js --mode development --watch"
+    "build": "webpack --config webpack.config.js --mode production && node build.js && node build-docs.js",
+    "dev": "node build.js && webpack --config webpack.config.js --mode development --watch",
+    "docs:build": "node build-docs.js"
   },
   "author": "memset0",
   "license": "MIT",
