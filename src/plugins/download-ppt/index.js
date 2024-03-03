@@ -1,6 +1,7 @@
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { limitConcurrency } from '../../utils/global';
+import { printToPdf } from '../../utils/browser.js';
 
 export const name = '课件下载';
 export const required = ['builtin-video-pages'];
@@ -50,24 +51,23 @@ export function load({ logger, elements, addButton }, options) {
     logger.debug(`删除同一秒内的PPT后(共${pptList.length}个):`, pptList[0]);
   }
 
-  addButton(1.1, '打包下载PPT', async ({ setStatus }) => {
+  addButton(1.1, '打包下载', async ({ setStatus }) => {
     setStatus('加载JSZip库');
     const zip = new JSZip();
 
-    setStatus('安排下载任务');
     let counter = 0;
     let total = pptList.length;
-    const imagePromises = pptList.map((ppt, index) => {
-      const filename = `ppt-${String(index).padStart(4, '0')}-${ppt.switchTime.replace(/\:/g, '-')}.jpg`;
-      return fetch(ppt.imgSrc, { method: 'GET' })
-        .then((response) => response.blob())
-        .then((blob) => {
-          logger.debug('添加图片', filename, blob);
-          setStatus(`正在下载(${++counter}/${total})`);
-          zip.file(filename, blob, { binary: true });
-        });
-    });
-    await limitConcurrency(imagePromises, 16);
+    await limitConcurrency(
+      pptList.map(async (ppt, index) => {
+        const filename = `ppt-${String(index).padStart(4, '0')}-${ppt.switchTime.replace(/\:/g, '-')}.jpg`;
+        const res = await fetch(ppt.imgSrc, { method: 'GET' });
+        const blob = await res.blob();
+        logger.debug('添加图片', filename, blob);
+        setStatus(`正在下载(${++counter}/${total})`);
+        zip.file(filename, blob, { binary: true });
+      }),
+      8
+    );
 
     setStatus('生成Zip');
     logger.debug(zip);
@@ -76,6 +76,39 @@ export function load({ logger, elements, addButton }, options) {
 
     setStatus('完成');
     saveAs(content, 'ppt.zip');
+    setStatus(null);
+  });
+
+  addButton(1.2, '导出为PDF', async ({ setStatus }) => {
+    let html = '';
+    let counter = 0;
+    let total = pptList.length;
+    const imageList = await limitConcurrency(
+      pptList.map(async (ppt, index) => {
+        const res = await fetch(ppt.imgSrc, { method: 'GET' });
+        setStatus(`正在下载(${++counter}/${total})`);
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        logger.log(index, blobUrl);
+        return blobUrl;
+      }),
+      8
+    );
+
+    setStatus('生成PDF');
+    for (const image of imageList) {
+      html += `<div class="page"><img src="${image}" /></div>`;
+    }
+
+    await printToPdf(
+      {
+        width: 1280,
+        height: 720,
+        margin: 0,
+      },
+      html
+    );
+
     setStatus(null);
   });
 }

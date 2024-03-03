@@ -1,7 +1,7 @@
 import logger from './utils/logger.js';
 import { sleep } from './utils/global.js';
 import { isVideoPage } from './utils/checker.js';
-import { copyToClipboard } from './utils/clipboard.js';
+import { copyToClipboard } from './utils/browser.js';
 
 class App {
   constructor() {
