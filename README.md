@@ -9,7 +9,7 @@
 
 <!-- The following content is auto-generated, please do not modify directly. -->
 
-## Features <small>`ver: 1.1.2`</small>
+## 功能列表
 
 ### 视频链接解析 [`download-video`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-video)
 
@@ -23,4 +23,6 @@
 
 如果需要使用被屏蔽的组件，到设置中关闭本功能即可。
 
+
+> 以上功能介绍基于版本 1.1.2 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 

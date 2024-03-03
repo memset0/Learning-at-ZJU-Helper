@@ -61,7 +61,7 @@ function updateReadme(version) {
   let [readme, _] = fs.readFileSync(path.join(__dirname, 'README.md'), 'utf-8').toString().split(SEPARATOR);
   readme += SEPARATOR + '\n\n';
 
-  readme += `## Features <small>\`ver: ${version}\`</small>\n\n`;
+  readme += `## 功能列表\n\n`;
 
   const plugins = fs.readdirSync(path.join(__dirname, 'src/plugins'));
   for (const plugin of plugins) {
@@ -77,6 +77,8 @@ function updateReadme(version) {
       readme += '\n\n';
     }
   }
+
+  readme += `> 以上功能介绍基于版本 ${version} 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。\n\n`;
 
   // console.log(readme);
   fs.writeFileSync(path.join(__dirname, 'README.md'), readme);
