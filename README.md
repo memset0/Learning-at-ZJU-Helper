@@ -13,7 +13,7 @@
 
 ### 更好的视频播放器 [`better-video-player`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/better-video-player)
 
-为视频播放器添加以下功能：
+为网课的视频播放器添加以下功能：
 
 - 网页全屏
 
@@ -45,5 +45,5 @@
 如果需要使用被屏蔽的组件，到设置中关闭本功能即可。
 
 
-> 以上功能介绍基于版本 1.2.0 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
+> 以上功能介绍基于版本 1.2.1 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 
