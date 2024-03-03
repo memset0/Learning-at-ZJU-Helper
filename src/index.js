@@ -47,7 +47,6 @@ class App {
   async load() {
     const context = {
       namespace: this.getNamespace(),
-      logger,
       clipboard: {
         copy: copyToClipboard,
       },
@@ -116,6 +115,7 @@ class App {
           }
           await plugin.load({
             ...context,
+            logger: logger.extends(plugin.slug),
           });
           plugin.loaded = true;
         }

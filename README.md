@@ -11,6 +11,13 @@
 
 ## 功能列表
 
+### 更好的视频播放器 [`better-video-player`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/better-video-player)
+
+为视频播放器添加以下功能：
+
+- 网页全屏
+
+
 ### 课件下载 [`download-ppt`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-ppt)
 
 下载智云课堂自动生成的课件，支持配置最小间隔时间，还支持多种下载方式：
