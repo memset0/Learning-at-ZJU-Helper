@@ -11,6 +11,13 @@
 
 ## 功能列表
 
+### 更好的 PTA [`better-pintia`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/better-pintia)
+
+PTA 助手，提供以下功能：
+
+- 复制题面，可用于题目纠错。
+
+
 ### 更好的视频播放器 [`better-video-player`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/better-video-player)
 
 为网课的视频播放器添加以下功能：
@@ -45,5 +52,5 @@
 如果需要使用被屏蔽的组件，到设置中关闭本功能即可。
 
 
-> 以上功能介绍基于版本 1.2.1 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
+> 以上功能介绍基于版本 1.3.0 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 

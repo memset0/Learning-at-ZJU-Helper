@@ -9,9 +9,14 @@ class App {
 
     if (hostname === 'courses.zju.edu.cn') {
       return '学在浙大';
-    } else if (hostname === 'classroom.zju.edu.cn' || hostname === 'livingroom.cmc.zju.edu.cn' || hostname === 'onlineroom.cmc.zju.edu.cn' || hostname === 'interactivemeta.cmc.zju.edu.cn') {
+    }
+    if (hostname === 'classroom.zju.edu.cn' || hostname === 'livingroom.cmc.zju.edu.cn' || hostname === 'onlineroom.cmc.zju.edu.cn' || hostname === 'interactivemeta.cmc.zju.edu.cn') {
       return '智云课堂';
     }
+    if (hostname === 'pintia.cn') {
+      return 'PTA';
+    }
+    return null;
   }
 
   loadScript(link) {

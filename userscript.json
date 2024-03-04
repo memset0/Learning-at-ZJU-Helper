@@ -4,7 +4,7 @@
   "namespace": "https://github.com/memset0/Learning-at-ZJU-Helper",
   "homepage": "https://github.com/memset0/Learning-at-ZJU-Helper",
   "supportURL": "https://github.com/memset0/Learning-at-ZJU-Helper/issues",
-  "match": ["*://classroom.zju.edu.cn/*", "*://onlineroom.cmc.zju.edu.cn/*", "*://livingroom.cmc.zju.edu.cn/*", "*://interactivemeta.cmc.zju.edu.cn/*", "*://courses.zju.edu.cn/*"],
+  "match": ["*://classroom.zju.edu.cn/*", "*://onlineroom.cmc.zju.edu.cn/*", "*://livingroom.cmc.zju.edu.cn/*", "*://interactivemeta.cmc.zju.edu.cn/*", "*://courses.zju.edu.cn/*", "**://pintia.cn/*"],
   "grant": ["unsafeWindow", "GM_setValue", "GM_getValue", "GM_addValueChangeListener", "GM_removeValueChangeListener", "GM_getResourceText"],
   "require": [],
   "resource": ["jszip.min.js https://jsd.cdn.zzko.cn/gh/memset0/Learning-at-ZJU-Helper@latest/lib/jszip.min.js"],

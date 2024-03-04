@@ -1,7 +1,7 @@
 import logger from './logger';
 
 export function copyToClipboard(text) {
-  const input = document.createElement('input');
+  const input = document.createElement('textarea');
   input.style.position = 'fixed';
   input.style.opacity = 0;
   input.value = text;
