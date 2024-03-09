@@ -15,7 +15,7 @@
 
 PTA 助手，提供以下功能：
 
-- 复制题面，可用于题目纠错。
+- 复制题面 *beta*，可用于题目纠错等场景。
 
 
 ### 更好的视频播放器 [`better-video-player`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/better-video-player)

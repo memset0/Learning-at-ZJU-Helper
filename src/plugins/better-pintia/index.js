@@ -11,6 +11,8 @@ export function skip({ namespace }) {
 }
 
 export function load({ logger, clipboard }) {
+  require('./style.less');
+
   async function render() {
     function getPlain($target) {
       const $wrapper = document.createElement('div');
