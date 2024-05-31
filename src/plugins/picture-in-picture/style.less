@@ -1,0 +1,55 @@
+.ppt_opr_lay>.pip-btn {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: -20px;
+}
+
+.pip-btn {
+  position: relative;
+  margin-right: 10px;
+  order: 2;
+  color: white;
+
+  >.svg-icon {
+    fill: white;
+    width: 24px;
+    height: 24px;
+    transition: fill 300ms;
+  }
+}
+
+.pip-window {
+  .pip-btn {
+    display: none;
+  }
+
+  >.ppt_container {
+    >.ppt_opr_con {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      background: black;
+    }
+
+    &:hover>.ppt_opr_con {
+      display: block;
+    }
+  }
+
+  .opr_lay {
+    justify-content: start !important;
+  }
+
+  .ppt_page_btn {
+    margin-left: 30px;
+  }
+
+  .el-slider__button-wrapper {
+    cursor: pointer !important;
+
+    >.el-slider__button {
+      cursor: pointer !important;
+    }
+  }
+}
