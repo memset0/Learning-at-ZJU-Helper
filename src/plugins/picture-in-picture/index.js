@@ -172,6 +172,9 @@ export async function load({ logger, document, elements, addButton }) {
       pip.document.body.className = 'pip-window';
       pip.document.body.append(ppt);
 
+      // Redraw to resize
+      pptVue.drawImg(pptVue.pptImgSrc);
+
       // Listen for the PiP closing event to move the video back.
       pip.addEventListener("pagehide", (event) => {
         const container = document.querySelector(".main_resize_con");
@@ -213,6 +216,9 @@ export async function load({ logger, document, elements, addButton }) {
               ,
               n.src = t
           };
+
+          // Redraw to resize
+          pptVue.drawImg(pptVue.pptImgSrc);
 
           getHook(document).style.display = "block";
         } else {
