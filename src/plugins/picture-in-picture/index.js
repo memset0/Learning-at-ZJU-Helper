@@ -39,7 +39,7 @@ function getHook(document) {
 function createButton() {
   const $button = document.createElement('div');
   $button.className = 'pip-btn';
-  $button.innerHTML = '<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M38 14H22v12h16V14zm4-8H6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 3.96 4 3.96h36c2.21 0 4-1.76 4-3.96V10c0-2.21-1.79-4-4-4zm0 32.03H6V9.97h36v28.06z"></path></svg>'
+  $button.innerHTML = '<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M38 14H22v12h16V14zm4-8H6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 3.96 4 3.96h36c2.21 0 4-1.76 4-3.96V10c0-2.21-1.79-4-4-4zm0 32.03H6V9.97h36v28.06z"></path></svg>';
   return $button;
 }
 
@@ -87,7 +87,7 @@ export function check({ document }) {
     logger.debug('PIP api not supported');
   }
 
-  return PIP && (!!getVideoWrapper(document)) && (!!getPPTWrapper(document)) && (!!getHook(document));
+  return PIP && !!getVideoWrapper(document) && !!getPPTWrapper(document) && !!getHook(document);
 }
 
 export async function load({ logger, document, elements, addButton }) {
@@ -97,8 +97,8 @@ export async function load({ logger, document, elements, addButton }) {
   const $videoBtn = createButton();
   $videoBtn.onclick = () => {
     // Native handle
-    document.querySelector("#cmc_player_video").requestPictureInPicture();
-  }
+    document.querySelector('#cmc_player_video').requestPictureInPicture();
+  };
   $videoWrapper.insertBefore($videoBtn, $videoWrapper.lastChild);
 
   let flag = false;
@@ -122,53 +122,48 @@ export async function load({ logger, document, elements, addButton }) {
       pip = openPIP();
 
       // Hook vue for document query
-      const pptVue = document.querySelector(".main_resize_con .ppt_container").__vue__;
-      const pptCanvas = document.querySelector("#ppt_canvas");
+      const pptVue = document.querySelector('.main_resize_con .ppt_container').__vue__;
+      const pptCanvas = document.querySelector('#ppt_canvas');
       pptVue.drawImg = function (t) {
-        var e = pptVue
-          , i = pptCanvas
-          , n = new Image;
-        n.crossOrigin = "anonymous",
-          n.onload = () => (function (elem) {
-            var t = n.width
-              , s = n.height
-              , a = elem.offsetWidth
-              , r = elem.offsetHeight
-              , o = i.getContext("2d")
-              , l = t / s
-              , c = a / r
-              , u = 0
-              , d = 0;
-            l > c ? d = (r - (s = (t = a) / l)) / 2 : u = (a - (t = (s = r) * l)) / 2,
-              console.log("imgW=", t, "imgH=", s, "imgRatio=", l, "csvRatio=", c, "drawPosY=", d, "drawPosX=", u),
-              i.setAttribute("width", a),
-              i.setAttribute("height", r),
-              o.drawImage(n, u, d, t, s);
-            var p = o.getImageData(0, 0, a, r);
-            e.middleAry = [p]
-          })(i)
-          ,
-          n.src = t
-      }
+        var e = pptVue,
+          i = pptCanvas,
+          n = new Image();
+        (n.crossOrigin = 'anonymous'),
+          (n.onload = () =>
+            (function (elem) {
+              var t = n.width,
+                s = n.height,
+                a = elem.offsetWidth,
+                r = elem.offsetHeight,
+                o = i.getContext('2d'),
+                l = t / s,
+                c = a / r,
+                u = 0,
+                d = 0;
+              l > c ? (d = (r - (s = (t = a) / l)) / 2) : (u = (a - (t = (s = r) * l)) / 2), console.log('imgW=', t, 'imgH=', s, 'imgRatio=', l, 'csvRatio=', c, 'drawPosY=', d, 'drawPosX=', u), i.setAttribute('width', a), i.setAttribute('height', r), o.drawImage(n, u, d, t, s);
+              var p = o.getImageData(0, 0, a, r);
+              e.middleAry = [p];
+            })(i)),
+          (n.src = t);
+      };
 
       // Drag is broken, just clean evt to clean error
-      const dragWrapperVue = document.querySelector(".el-slider__button-wrapper").__vue__;
-      const dragVue = document.querySelector(".el-slider__button").__vue__;
+      const dragWrapperVue = document.querySelector('.el-slider__button-wrapper').__vue__;
+      const dragVue = document.querySelector('.el-slider__button').__vue__;
       let dragCache = {};
       dragCache.onDragStart = dragWrapperVue.onDragStart;
-      dragWrapperVue.onDragStart = function () { };
+      dragWrapperVue.onDragStart = function () {};
       dragCache.onDragging = dragWrapperVue.onDragging;
-      dragWrapperVue.onDragging = function () { };
+      dragWrapperVue.onDragging = function () {};
       dragCache.onDragEnd = dragWrapperVue.onDragEnd;
-      dragWrapperVue.onDragEnd = function () { };
+      dragWrapperVue.onDragEnd = function () {};
       dragCache.updatePopper = dragVue.updatePopper;
-      dragVue.updatePopper = function () { };
+      dragVue.updatePopper = function () {};
 
       pip = await pip;
-      getHook(document).style.display = "none";
+      getHook(document).style.display = 'none';
 
-
-      const ppt = document.querySelector(".main_resize_con").firstElementChild;
+      const ppt = document.querySelector('.main_resize_con').firstElementChild;
       pip.document.body.className = 'pip-window';
       pip.document.body.append(ppt);
 
@@ -176,8 +171,8 @@ export async function load({ logger, document, elements, addButton }) {
       pptVue.drawImg(pptVue.pptImgSrc);
 
       // Listen for the PiP closing event to move the video back.
-      pip.addEventListener("pagehide", (event) => {
-        const container = document.querySelector(".main_resize_con");
+      pip.addEventListener('pagehide', (event) => {
+        const container = document.querySelector('.main_resize_con');
         const elem = event.target.body.lastChild;
 
         // This is very strange, if you directly pip.close(), evt will fire, but elem has gone. maybe vue unmounted?
@@ -191,40 +186,34 @@ export async function load({ logger, document, elements, addButton }) {
           dragVue.updatePopper = dragCache.updatePopper;
 
           pptVue.drawImg = function (t) {
-            var e = this
-              , i = document.getElementById("ppt_canvas")
-              , n = new Image;
-            n.crossOrigin = "anonymous",
-              n.onload = function () {
-                var t = n.width
-                  , s = n.height
-                  , a = document.getElementById("ppt").offsetWidth
-                  , r = document.getElementById("ppt").offsetHeight
-                  , o = i.getContext("2d")
-                  , l = t / s
-                  , c = a / r
-                  , u = 0
-                  , d = 0;
-                l > c ? d = (r - (s = (t = a) / l)) / 2 : u = (a - (t = (s = r) * l)) / 2,
-                  console.log("imgW=", t, "imgH=", s, "imgRatio=", l, "csvRatio=", c, "drawPosY=", d, "drawPosX=", u),
-                  i.setAttribute("width", a),
-                  i.setAttribute("height", r),
-                  o.drawImage(n, u, d, t, s);
+            var e = this,
+              i = document.getElementById('ppt_canvas'),
+              n = new Image();
+            (n.crossOrigin = 'anonymous'),
+              (n.onload = function () {
+                var t = n.width,
+                  s = n.height,
+                  a = document.getElementById('ppt').offsetWidth,
+                  r = document.getElementById('ppt').offsetHeight,
+                  o = i.getContext('2d'),
+                  l = t / s,
+                  c = a / r,
+                  u = 0,
+                  d = 0;
+                l > c ? (d = (r - (s = (t = a) / l)) / 2) : (u = (a - (t = (s = r) * l)) / 2), console.log('imgW=', t, 'imgH=', s, 'imgRatio=', l, 'csvRatio=', c, 'drawPosY=', d, 'drawPosX=', u), i.setAttribute('width', a), i.setAttribute('height', r), o.drawImage(n, u, d, t, s);
                 var p = o.getImageData(0, 0, a, r);
-                e.middleAry = [p]
-              }
-              ,
-              n.src = t
+                e.middleAry = [p];
+              }),
+              (n.src = t);
           };
 
           // Redraw to resize
           pptVue.drawImg(pptVue.pptImgSrc);
 
-          getHook(document).style.display = "block";
+          getHook(document).style.display = 'block';
         } else {
           // create elem manually not working, maybe a racing condition?
           // just hidden the btn to solve it.
-
           // let e = container.createElement("div");
           // e.className = "ppt_container"
           // e = e.createElement("div");
@@ -237,5 +226,5 @@ export async function load({ logger, document, elements, addButton }) {
     };
 
     $pptWrapper.insertBefore($pptBtn, null);
-  }
+  };
 }
