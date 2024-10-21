@@ -25,7 +25,7 @@ PTA 助手，提供以下功能：
 - 网页全屏
 
 
-### 带时间戳的地址复制（精准空降） `copy-with-timestamp` [`copy-with-timestamp`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/copy-with-timestamp)
+### 带时间戳的地址复制（精准空降） [`copy-with-timestamp`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/copy-with-timestamp)
 
 复制带时间戳的视频地址，这样再次打开时就会自动跳转到对应位置。
 
@@ -58,7 +58,7 @@ PTA 助手，提供以下功能：
 如果需要使用被屏蔽的组件，到设置中关闭本功能即可。
 
 
-### 画中画模式 `picture-in-picture` [`picture-in-picture`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/picture-in-picture)
+### 画中画模式 [`picture-in-picture`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/picture-in-picture)
 
 > 感谢 [@Trzeth](https://github.com/Trzeth) 贡献。
 
@@ -66,5 +66,5 @@ PTA 助手，提供以下功能：
 
 
 
-> 以上功能介绍基于版本 1.5.1 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
+> 以上功能介绍基于版本 1.5.2 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 
