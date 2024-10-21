@@ -68,7 +68,7 @@ function updateReadme(version) {
     if (fs.existsSync(path.join(__dirname, 'src/plugins', plugin, 'README.md'))) {
       for (const line of fs.readFileSync(path.join(__dirname, 'src/plugins', plugin, 'README.md'), 'utf-8').toString().split('\n')) {
         if (line.startsWith('## ')) {
-          const title = line.slice(3);
+          const title = line.slice(3).trim();
           readme += `### ${title} [\`${plugin}\`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/${plugin})\n`;
         } else {
           readme += line + '\n';
