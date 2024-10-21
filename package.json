@@ -1,6 +1,6 @@
 {
   "name": "learning-at-zju-helper",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "学在浙大/智云课堂 辅助脚本",
   "main": "src/app.js",
   "scripts": {
