@@ -9,13 +9,17 @@
   position: relative;
   margin-right: 10px;
   order: 2;
-  color: white;
+  opacity: 0.75;
 
   > .svg-icon {
     fill: white;
     width: 24px;
     height: 24px;
-    transition: fill 300ms;
+    // transition: fill 300ms;
+  }
+
+  &:hover > .svg-icon {
+    fill: rgb(36, 142, 241);
   }
 }
 
