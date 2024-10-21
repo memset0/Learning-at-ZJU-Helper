@@ -5,10 +5,7 @@ export const required = ['builtin-video-pages'];
 
 function getWrapper(document) {
   const $wrapper = document.querySelector('.control-bottom .control-right');
-  if (!$wrapper) {
-    return null;
-  }
-  if (!$wrapper.children || $wrapper.children.length === 0) {
+  if (!$wrapper || !$wrapper.children || $wrapper.children.length === 0) {
     return null;
   }
   return $wrapper;
@@ -18,7 +15,7 @@ export function check({ document }) {
   return !!getWrapper(document);
 }
 
-export async function load({ logger, document, elements, addButton }) {
+export async function load({ logger, document, elements }) {
   require('./style.less');
 
   async function toggleFullscreen() {
@@ -34,5 +31,4 @@ export async function load({ logger, document, elements, addButton }) {
   $button.innerText = '网页全屏';
   $button.onclick = () => toggleFullscreen();
   $wrapper.insertBefore($button, $wrapper.firstChild);
-  logger.debug('wrapper', $wrapper, $button);
 }

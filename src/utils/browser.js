@@ -38,3 +38,28 @@ export async function printToPdf(options, html) {
     }, 1);
   };
 }
+
+export function loadUrlQuery(search) {
+  const query = {};
+  search
+    .slice(1)
+    .split('&')
+    .forEach((item) => {
+      const [key, value] = item.split('=');
+      query[key] = value;
+    });
+  return query;
+}
+
+export function dumpUrlQuery(query) {
+  return (
+    '?' +
+    Object.entries(query)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&')
+  );
+}
+
+export function showMessage(message) {
+  alert(message);
+}

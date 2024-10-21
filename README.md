@@ -25,6 +25,12 @@ PTA 助手，提供以下功能：
 - 网页全屏
 
 
+### 带时间戳的地址复制（精准空降） [`copy-with-timestamp`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/copy-with-timestamp)
+
+复制带时间戳的视频地址，这样再次打开时就会自动跳转到对应位置。
+
+
+
 ### 课件下载 [`download-ppt`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-ppt)
 
 下载智云课堂自动生成的课件，支持配置最小间隔时间，还支持多种下载方式：
@@ -39,7 +45,7 @@ PTA 助手，提供以下功能：
 
 
 
-### 视频链接解析 [`download-video`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-video)
+### 视频链接解析 [`download-video`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/download-video)
 
 添加视频解析按钮，点击后自动复制视频连接到剪贴板，可以直接下载。直播也能使用，但需要在流媒体播放器中打开。
 
