@@ -1,4 +1,4 @@
-## 画中画模式 `picture-in-picture`
+## 画中画模式
 
 > 感谢 [@Trzeth](https://github.com/Trzeth) 贡献。
 
