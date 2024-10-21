@@ -25,7 +25,7 @@ PTA 助手，提供以下功能：
 - 网页全屏
 
 
-### 带时间戳的地址复制（精准空降） [`copy-with-timestamp`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/copy-with-timestamp)
+### 带时间戳的地址复制（精准空降） `copy-with-timestamp` [`copy-with-timestamp`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/copy-with-timestamp)
 
 复制带时间戳的视频地址，这样再次打开时就会自动跳转到对应位置。
 
@@ -58,5 +58,13 @@ PTA 助手，提供以下功能：
 如果需要使用被屏蔽的组件，到设置中关闭本功能即可。
 
 
-> 以上功能介绍基于版本 1.3.0 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
+### 画中画模式 `picture-in-picture` [`picture-in-picture`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/picture-in-picture)
+
+> 感谢 [@Trzeth](https://github.com/Trzeth) 贡献。
+
+允许智云课堂的视频或 PPT 兼容浏览器画中画（PIP）功能。通过点击 <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M38 14H22v12h16V14zm4-8H6c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 3.96 4 3.96h36c2.21 0 4-1.76 4-3.96V10c0-2.21-1.79-4-4-4zm0 32.03H6V9.97h36v28.06z"></path></svg> 按钮进入。
+
+
+
+> 以上功能介绍基于版本 1.4.0 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 
