@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production && node build.js",
-    "dev": "node build.js && webpack --config webpack.config.js --mode development --watch"
+    "dev": "node build.js && webpack --config webpack.config.js --mode development --watch",
+    "version": "node build.js"
   },
   "author": "memset0",
   "license": "MIT",
