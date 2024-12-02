@@ -12,15 +12,15 @@
   "license": "MIT",
   "dependencies": {
     "clean-css-loader": "^4.2.1",
-    "css-loader": "^6.10.0",
+    "css-loader": "^7.1.2",
     "file-saver": "^2.0.5",
     "js-beautify": "^1.15.1",
     "less-loader": "^12.2.0",
-    "less-plugin-clean-css": "^1.5.1",
-    "loader-utils": "^3.2.1",
-    "mini-css-extract-plugin": "^2.8.1",
-    "style-loader": "^3.3.4",
-    "webpack": "^5.90.3",
+    "less-plugin-clean-css": "^1.6.0",
+    "loader-utils": "^3.3.1",
+    "mini-css-extract-plugin": "^2.9.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
   }
 }
