@@ -1,6 +1,7 @@
 import { isVueReady } from '../../utils/vue.js';
 
 export const name = '[builtin]视频页面前置';
+export const description = '内置插件，用于处理智云课堂的视频页面的播放器及相关内容。另外，将这一插件加入到其余模块的前置列表中，可以确保这些模块在播放器加载后再进行加载。';
 
 export function skip({ env }) {
   return !env.isVideoPage;
@@ -25,6 +26,8 @@ function getElements({ document }) {
 }
 
 export function check({ document }) {
+  // 检查能否从 document 中获取到播放器组件和对应的 Vue 实例。
+  // 直到能够获取，才结束等待并正式加载本插件。
   return !!getElements({ document });
 }
 
