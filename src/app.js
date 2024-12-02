@@ -1,7 +1,7 @@
 import logger from './utils/logger.js';
-import { sleep } from './utils/global.js';
 import { isVideoPage } from './utils/checker.js';
 import { copyToClipboard } from './utils/browser.js';
+import { sleep, matchRoute } from './utils/global.js';
 
 class App {
   getNamespace() {
@@ -50,6 +50,7 @@ class App {
   }
 
   async load() {
+    // 上下文管理
     const context = {
       namespace: this.getNamespace(),
       clipboard: {
@@ -57,24 +58,18 @@ class App {
       },
       window: unsafeWindow,
       document: unsafeWindow.document,
+      location: unsafeWindow.location,
       env: { isVideoPage: isVideoPage() },
       loadScript: (link) => this.loadScript(link),
     };
-    const extendContext = (data) => {
-      for (const key in data) {
-        if (Object.keys(context).includes(key) && context[key] instanceof Object) {
-          context[key] = { ...context[key], ...data[key] };
-        } else {
-          context[key] = data[key];
-        }
-      }
-    };
-    context.extendContext = extendContext;
 
+    // 检查插件队列是否已经清空
     const isQueueCleaned = () => {
       for (const slug in this.plugins) {
         const plugin = this.plugins[slug];
-        if (!plugin.loaded) return false;
+        if (!plugin.loaded) {
+          return false;
+        }
       }
       return true;
     };
@@ -85,6 +80,13 @@ class App {
       for (const slug in this.plugins) {
         const plugin = this.plugins[slug];
         if (!plugin.loaded) {
+          // 合成插件上下文
+          const pluginContext = {
+            ...context,
+            logger: logger.extends(plugin.slug),
+          };
+
+          // 检测插件前置列表
           if (plugin.required && plugin.required instanceof Array && plugin.required.length > 0) {
             let status = 'ok';
             for (const required of plugin.required) {
@@ -105,35 +107,70 @@ class App {
               continue;
             }
           }
-          if (plugin.skip instanceof Function) {
-            if (await plugin.skip(context)) {
-              plugin.loaded = true;
-              plugin.skipped = true;
-              logger.debug(`跳过加载 ${plugin.slug} 插件`);
-              continue;
+
+          // 检查该插件是否需要跳过
+          let needSkip = false;
+          if (!needSkip && plugin.namespace) {
+            if (plugin.namespace instanceof Array) {
+              if (!plugin.namespace.includes(context.namespace)) {
+                needSkip = true;
+              }
+            } else if (plugin.namespace !== context.namespace) {
+              needSkip = true;
             }
           }
+          if (!needSkip && plugin.route) {
+            if (matchRoute(plugin.route, location.pathname) === false) {
+              needSkip = true;
+            }
+          }
+          if (!needSkip && plugin.skip instanceof Function) {
+            if (await plugin.skip(pluginContext)) {
+              needSkip = true;
+            }
+          }
+          if (needSkip) {
+            plugin.loaded = true;
+            plugin.skipped = true;
+            logger.debug(`跳过加载 ${plugin.slug} 插件`);
+            continue;
+          }
+
+          // 检查该插件是否可以加载
           if (plugin.check instanceof Function) {
-            if (!(await plugin.check(context))) {
+            if (!(await plugin.check(pluginContext))) {
               continue;
             }
           }
-          await plugin.load({
-            ...context,
-            logger: logger.extends(plugin.slug),
-          });
+
+          if (plugin.route) {
+            const params = matchRoute(plugin.route, location.pathname);
+            pluginContext.params = params;
+          }
+          // 进行插件加载
+          await plugin.load(pluginContext);
           plugin.loaded = true;
         }
       }
+
+      // 等待 100ms 后进行下一轮检查，避免阻塞渲染进程
       await sleep(100);
     } while (!isQueueCleaned() && ++retryTimes < 129);
-    logger.info('插件加载完成!');
+
+    if (!isQueueCleaned()) {
+      logger.error(
+        '插件加载失败，还有以下插件未加载:',
+        Object.keys(this.plugins).filter((slug) => !this.plugins[slug].loaded)
+      );
+    } else {
+      logger.info('插件加载完成!');
+    }
   }
 
   safe_load() {
     (async () => {
       try {
-        await app.load(); // 这里需要 await，否则会捕获不到异常
+        await app.load(); // 这里需要 await，否则捕获不到异常
       } catch (error) {
         logger.error(error);
         throw error;

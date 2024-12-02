@@ -37,3 +37,43 @@ export function limitConcurrency(tasks, limit) {
     startNext();
   });
 }
+
+export function matchRoute(route, pathname) {
+  const paramTypes = [];
+  const paramNames = [];
+  let paramMatch;
+  const paramRegex = /<([^>:]+)(?::([^>]+))?>/g;
+  while ((paramMatch = paramRegex.exec(route)) !== null) {
+    const name = paramMatch[1];
+    const type = paramMatch[2] || 'string';
+    paramTypes.push(type);
+    paramNames.push(name);
+  }
+
+  const pattern = route.replace(/<([^>:]+)(?::([^>]+))?>/g, '([^/]+)');
+  const regex = new RegExp(`^${pattern}$`);
+
+  const match = pathname.match(regex);
+  if (!match) {
+    return false;
+  }
+
+  const result = {};
+  for (let i = 0; i < paramNames.length; i++) {
+    const value = match[i + 1];
+    const type = paramTypes[i];
+
+    if (type === 'int') {
+      if (!/^\d+$/.test(value)) {
+        return false;
+      }
+      result[paramNames[i]] = parseInt(value);
+    } else if (type === 'string') {
+      result[paramNames[i]] = value;
+    } else {
+      return false;
+    }
+  }
+
+  return result;
+}
