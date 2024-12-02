@@ -11,10 +11,12 @@
   "author": "memset0",
   "license": "MIT",
   "dependencies": {
+    "@ui5/webcomponents": "^2.4.0",
     "clean-css-loader": "^4.2.1",
     "css-loader": "^7.1.2",
     "file-saver": "^2.0.5",
     "js-beautify": "^1.15.1",
+    "learning-at-zju-helper": "file:",
     "less-loader": "^12.2.0",
     "less-plugin-clean-css": "^1.6.0",
     "loader-utils": "^3.3.1",

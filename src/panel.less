@@ -1,0 +1,28 @@
+@panel-width: 260px;
+
+.zju-helper {
+  position: fixed;
+  top: 0;
+  left: -@panel-width; // 初始状态隐藏在左侧
+  width: @panel-width;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 9999;
+
+  &.visible {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.zju-helper-trigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 100vh;
+  z-index: 9998;
+}

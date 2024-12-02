@@ -1,3 +1,5 @@
+import { initializePanel } from './panel.js';
+
 import logger from './utils/logger.js';
 import { isVideoPage } from './utils/checker.js';
 import { copyToClipboard } from './utils/browser.js';
@@ -50,8 +52,12 @@ class App {
   }
 
   async load() {
+    // 初始化面板
+    const panel = initializePanel();
+
     // 上下文管理
     const context = {
+      panel,
       namespace: this.getNamespace(),
       clipboard: {
         copy: copyToClipboard,
