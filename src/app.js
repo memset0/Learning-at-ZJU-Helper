@@ -2,8 +2,8 @@ import { initializePanel } from './panel';
 
 import logger from './utils/logger';
 import { isVideoPage } from './utils/checker';
-import { copyToClipboard } from './utils/browser';
 import { sleep, matchRoute } from './utils/global';
+import { copyToClipboard, loadUrlQuery } from './utils/browser';
 
 class App {
   getNamespace() {
@@ -41,7 +41,7 @@ class App {
     const pluginLoader = require.context('./plugins', true, /\/index\.js$/);
     pluginLoader.keys().forEach((filename) => {
       const slug = filename.slice(2, -9);
-      if (slug === 'example-plugin') {
+      if (slug.startsWith('example-')) {
         return; // 示例插件将不会被加载
       }
       this.plugins[slug] = pluginLoader(filename);
@@ -56,17 +56,21 @@ class App {
     const panel = initializePanel(this.plugins);
 
     // 上下文管理
-    const context = {
+    const globalContext = {
       panel,
       namespace: this.getNamespace(),
       clipboard: {
         copy: copyToClipboard,
       },
+      query: loadUrlQuery(location.search),
       window: unsafeWindow,
       document: unsafeWindow.document,
       location: unsafeWindow.location,
       env: { isVideoPage: isVideoPage() },
       loadScript: (link) => this.loadScript(link),
+      extendContext: (context) => {
+        Object.assign(globalContext, context);
+      },
     };
 
     // 检查插件队列是否已经清空
@@ -88,7 +92,7 @@ class App {
         if (!plugin.loaded) {
           // 合成插件上下文
           const pluginContext = {
-            ...context,
+            ...globalContext, // 这里每次都需要重新综合一次主 globalContext，因为其可能被插件更新
             logger: logger.extends(plugin.slug),
             panelInitialize: panel.pluginInitializers[plugin.slug],
           };
@@ -119,10 +123,10 @@ class App {
           let needSkip = false;
           if (!needSkip && plugin.namespace) {
             if (plugin.namespace instanceof Array) {
-              if (!plugin.namespace.includes(context.namespace)) {
+              if (!plugin.namespace.includes(globalContext.namespace)) {
                 needSkip = true;
               }
-            } else if (plugin.namespace !== context.namespace) {
+            } else if (plugin.namespace !== globalContext.namespace) {
               needSkip = true;
             }
           }
