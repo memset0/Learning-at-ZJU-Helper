@@ -36,9 +36,22 @@ export function initializePanel(plugins) {
         </ui5-card>
       );
       const $cardContent = createElement(<div class="zju-helper-plugin-content"></div>);
+      const $pluginRoot = createElement(<div></div>);
+      $cardContent.appendChild($pluginRoot);
       $card.appendChild($cardContent);
       $panel.appendChild($card);
-      return $cardContent;
+
+      // 检测是否存在滚动条，用于实现动画效果
+      const observer = new ResizeObserver(() => {
+        if ($cardContent.scrollHeight > $cardContent.clientHeight) {
+          $cardContent.classList.add('has-overflow');
+        } else {
+          $cardContent.classList.remove('has-overflow');
+        }
+      });
+      observer.observe($pluginRoot);
+
+      return $pluginRoot;
     };
     pluginInitializers[slug] = initializer;
   });

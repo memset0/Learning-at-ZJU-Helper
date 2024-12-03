@@ -18,6 +18,21 @@
   backdrop-filter: blur(4px);
   background-color: rgba(255, 255, 255, 0.2);
 
+  // 滚动
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
   &.visible {
     left: 0;
     opacity: 1;
@@ -41,12 +56,32 @@
   z-index: 9998;
 }
 
+// 插件卡片
+.zju-helper-plugin {
+  .zju-helper-plugin-content {
+    max-height: 400px;
+    overflow-y: hidden;
+    transition: max-height (@duration * 2) cubic-bezier(0, 1, 0, 1);
+
+    &.has-overflow {
+      mask-image: linear-gradient(to bottom, black 0%, black 80%, rgba(0, 0, 0, 0.1) 100%);
+    }
+  }
+
+  &:hover .zju-helper-plugin-content {
+    max-height: 9999vh;
+    transition: max-height (@duration * 4) ease-in-out;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
 // theme overrides
 *,
 :before,
 :after {
   --_ui5-v2-4-0_card_header_title_font_weight: bold !important;
   --_ui5-v2-4-0_card_header_padding: 1rem 1rem 0 1rem !important;
-	--_ui5-v2-4-0_tl_li_margin_bottom: 0.625rem !important;
-	--_ui5-v2-4-0_timeline_tli_indicator_before_bottom: -0.625rem !important;
+  --_ui5-v2-4-0_tl_li_margin_bottom: 0.625rem !important;
+  --_ui5-v2-4-0_timeline_tli_indicator_before_bottom: -0.625rem !important;
 }

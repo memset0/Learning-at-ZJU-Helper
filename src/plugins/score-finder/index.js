@@ -90,10 +90,13 @@ export async function load({ params, logger, panelInitialize }) {
         }
 
         logger.debug('活动:', activity);
-        const timestamp = activity.last_visited_at ? Date.parse(activity.last_visited_at) : Date.now();
 
         items.push(
-          <ui5-timeline-item title-text={activity.title} timestamp={timestamp} icon={icon} nameClickable={link !== null}>
+          <ui5-timeline-item //
+            title-text={activity.title}
+            icon={icon}
+            timestamp={activity.last_visited_at ? Date.parse(activity.last_visited_at) : Date.now()}
+          >
             <div class="score-finder-item-content">{content}</div>
           </ui5-timeline-item>
         );
