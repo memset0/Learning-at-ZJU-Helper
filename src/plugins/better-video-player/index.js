@@ -2,6 +2,7 @@ import { sleep } from '../../utils/global.js';
 
 export const name = '更好的视频播放器';
 export const required = ['builtin-video-pages'];
+export const namespace = '智云课堂';
 
 function getWrapper(document) {
   const $wrapper = document.querySelector('.control-bottom .control-right');
@@ -31,4 +32,4 @@ export async function load({ logger, document, elements }) {
   $button.innerText = '网页全屏';
   $button.onclick = () => toggleFullscreen();
   $wrapper.insertBefore($button, $wrapper.firstChild);
-}
+} 

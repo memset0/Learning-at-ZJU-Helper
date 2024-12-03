@@ -1,5 +1,6 @@
 export const name = '视频链接解析';
 export const required = ['builtin-video-pages'];
+export const namespace = '智云课堂';
 
 export function load({ logger, clipboard, elements, addButton }) {
   // context.elements 是在 builtin-video-pages 插件中注入的

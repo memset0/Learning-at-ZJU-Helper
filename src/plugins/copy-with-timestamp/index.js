@@ -2,6 +2,7 @@ import { copyToClipboard, showMessage, loadUrlQuery, dumpUrlQuery } from '../../
 
 export const name = '带时间戳的地址复制（精准空降）';
 export const required = ['builtin-video-pages'];
+export const namespace = '智云课堂';
 
 function getWrapper(document) {
   const $wrapper = document.querySelector('.control-bottom .control-right');

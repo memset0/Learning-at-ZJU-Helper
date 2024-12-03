@@ -2,6 +2,7 @@ import { sleep } from '../../utils/global.js';
 
 export const name = '播放器画中画';
 export const required = ['builtin-video-pages'];
+export const namespace = '智云课堂';
 
 function getVideoWrapper(document) {
   const $wrapper = document.querySelector('.control-bottom .control-right');

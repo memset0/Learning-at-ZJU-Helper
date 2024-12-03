@@ -76,39 +76,38 @@ export function initializePanel(plugins) {
     }
     return 10;
   }
-  const panelHeaderActions = {
-    pushLoadedPlugin:
-      (newPlugin) =>
-      ({ loadedPlugins }) => {
-        console.debug('[zju-helper] push loaded plugin', newPlugin);
-        loadedPlugins.push(newPlugin);
-        return { loadedPlugins };
-      },
-  };
-  app({
+  const panelHeaderDispatch = app({
     node: $panelHeader,
     init: { loadedPlugins: [] },
-    actions: panelHeaderActions,
     view: ({ loadedPlugins }) => (
       <ui5-card>
         <div class="zju-helper-panel-header">
           <div class="zju-helper-panel-header-title">学在浙大/智云课堂小助手</div>
-          <div class="zju-helper-loaded-plugins-slogen">
-            当前共加载 {loadedPlugins.length} 个插件{JSON.stringify(loadedPlugins)}
-          </div>
+          <div class="zju-helper-loaded-plugins-slogen">当前共加载 {loadedPlugins.length} 个插件</div>
           <div class="zju-helper-loaded-plugins">
             {loadedPlugins.map((plugin) => (
-              <span class="zju-helper-loaded-plugin-tag">
+              <a //
+                class="zju-helper-loaded-plugin-tag"
+                target="_blank"
+                href={`https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/${plugin.slug}`}
+              >
                 <ui5-tag design="Set2" color-scheme={getPluginColorScheme(plugin)}>
                   {plugin.slug}
                 </ui5-tag>
-              </span>
+              </a>
             ))}
           </div>
         </div>
       </ui5-card>
     ),
   });
+  function pushLoadedPlugin(newPlugin) {
+    panelHeaderDispatch((state) => {
+      console.debug('[zju-helper] push loaded plugin', newPlugin);
+      state.loadedPlugins.push(newPlugin);
+      return { ...state };
+    });
+  }
 
   return {
     element: $panel,
@@ -116,6 +115,6 @@ export function initializePanel(plugins) {
     hide: hidePanel,
     toggle: togglePanel,
     pluginInitializers,
-    pushLoadedPlugin: panelHeaderActions.pushLoadedPlugin,
+    pushLoadedPlugin,
   };
 }

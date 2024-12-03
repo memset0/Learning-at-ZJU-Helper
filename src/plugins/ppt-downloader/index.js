@@ -4,6 +4,8 @@ import { printToPdf } from '../../utils/browser.js';
 
 export const name = '课件下载';
 export const required = ['builtin-video-pages'];
+export const namespace = '智云课堂';
+
 export const options = {
   'auto-remove': true,
 };
