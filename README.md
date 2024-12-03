@@ -67,9 +67,9 @@ PTA 助手，提供以下功能：
 
 
 
-### 成绩查找 [`score-finder`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/score-finder)
+### 成绩嗅探 [`score-finder`](https://github.com/memset0/Learning-at-ZJU-Helper/tree/master/src/plugins/score-finder)
 
-通过 API 显示学在浙大中已被登记但尚未公开的成绩。
+通过 API 查询学在浙大中已被登记但尚未公开的成绩。
 
 
 
