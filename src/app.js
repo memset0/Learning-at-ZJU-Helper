@@ -163,7 +163,6 @@ class App {
           await plugin.load(pluginContext);
           plugin.loaded = true;
 
-          logger.debug(panel.pushLoadedPlugin);
           panel.pushLoadedPlugin({
             slug: plugin.slug,
             name: plugin.name,

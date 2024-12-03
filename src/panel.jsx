@@ -103,7 +103,6 @@ export function initializePanel(plugins) {
   });
   function pushLoadedPlugin(newPlugin) {
     panelHeaderDispatch((state) => {
-      console.debug('[zju-helper] push loaded plugin', newPlugin);
       state.loadedPlugins.push(newPlugin);
       return { ...state };
     });
