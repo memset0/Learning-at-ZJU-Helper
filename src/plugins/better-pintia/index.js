@@ -1,13 +1,10 @@
 import { sleep } from '../../utils/global';
 
 export const name = '更好的 PTA';
+export const namespace = 'PTA';
 
 function getUrl() {
   return location.href + location.hash;
-}
-
-export function skip({ namespace }) {
-  return namespace !== 'PTA';
 }
 
 export function load({ logger, clipboard }) {
