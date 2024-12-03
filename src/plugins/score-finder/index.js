@@ -56,28 +56,34 @@ export async function load({ params, logger, panelInitialize }) {
     node: panelInitialize(),
     view: () => {
       if (activityReads.length === 0) {
-        return <span>没有检测到作业或考试。</span>;
+        return <div class="score-finder-no-activity">没有检测到作业或考试。</div>;
       }
+
       const items = [];
+      let meaninglessCounter = 0;
+
       for (const activity of activityReads) {
         let icon = null;
         let link = null;
         let content = '';
+        let addToItems = true;
 
         if (activity.activity_type === 'learning_activity') {
           icon = 'document-text';
           link = `https://courses.zju.edu.cn/course/${courseId}/learning-activity#/${activity.activity_id}`;
-          if (activity.title != '未知活动') {
+          if (activity.title === '未知活动') {
+            icon = 'accelerated';
+            if (Object.keys(activity.data).length === 0) {
+              addToItems = false;
+              meaninglessCounter += 1;
+            } else {
+              content = JSON.stringify(activity.data);
+            }
+          } else {
             if (activity.data.score === undefined) {
               content = '未评分';
             } else {
               content = `得分：${activity.data.score}`;
-            }
-          } else {
-            if (Object.keys(activity.data).length === 0) {
-              content = '缺少数据';
-            } else {
-              content = JSON.stringify(activity.data);
             }
           }
         } else if (activity.activity_type === 'exam_activity') {
@@ -91,18 +97,26 @@ export async function load({ params, logger, panelInitialize }) {
 
         logger.debug('活动:', activity);
 
-        items.push(
-          <ui5-timeline-item //
-            title-text={activity.title}
-            icon={icon}
-            timestamp={activity.last_visited_at ? Date.parse(activity.last_visited_at) : Date.now()}
-          >
-            <div class="score-finder-item-content">{content}</div>
-          </ui5-timeline-item>
-        );
+        if (addToItems) {
+          items.push(
+            <ui5-timeline-item //
+              title-text={activity.title}
+              icon={icon}
+              timestamp={activity.last_visited_at ? Date.parse(activity.last_visited_at) : Date.now()}
+            >
+              <div class="score-finder-item-content">{content}</div>
+            </ui5-timeline-item>
+          );
+        }
       }
       logger.debug('活动组件:', items);
-      return <ui5-timeline>{items}</ui5-timeline>;
+
+      return (
+        <div>
+          <ui5-timeline>{items}</ui5-timeline>
+          {meaninglessCounter > 0 ? <div class="score-finder-meaningless-counter">还有 {meaninglessCounter} 条缺少数据的活动。</div> : null}
+        </div>
+      );
     },
   });
 }
