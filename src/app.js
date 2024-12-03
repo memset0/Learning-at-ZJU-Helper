@@ -86,6 +86,7 @@ class App {
 
     logger.debug('开始加载插件', this.plugins);
     let retryTimes = 0;
+
     do {
       for (const slug in this.plugins) {
         const plugin = this.plugins[slug];
@@ -161,6 +162,14 @@ class App {
           // 进行插件加载
           await plugin.load(pluginContext);
           plugin.loaded = true;
+
+          logger.debug(panel.pushLoadedPlugin);
+          panel.pushLoadedPlugin({
+            slug: plugin.slug,
+            name: plugin.name,
+            namespace: plugin.namespace ? globalContext.namespace : null,
+            description: plugin.description,
+          });
         }
       }
 

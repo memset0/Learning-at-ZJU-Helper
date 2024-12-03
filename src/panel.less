@@ -1,7 +1,16 @@
 @panel-width: 260px;
 @duration: 0.25s;
 
+html {
+  font-size: 16px;
+}
+
 .zju-helper {
+  &,
+  & * {
+    box-sizing: border-box;
+  }
+
   position: fixed;
   top: 0;
   left: -@panel-width; // 初始状态隐藏在左侧
@@ -12,7 +21,7 @@
   opacity: 0;
   z-index: 9999;
 
-  padding: 30px 15px;
+  padding: 1.5rem 1rem;
 
   // 毛玻璃效果
   backdrop-filter: blur(4px);
@@ -56,10 +65,33 @@
   z-index: 9998;
 }
 
+// 侧边栏 header
+.zju-helper-panel-header {
+  padding: 1rem;
+
+  .zju-helper-panel-header-title {
+    margin-top: 0.15rem;
+    font-weight: bold;
+    font-size: 1.025rem;
+  }
+
+  .zju-helper-loaded-plugins-slogen {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .zju-helper-loaded-plugins {
+    margin-top: 0.5rem;
+  }
+}
+
 // 插件卡片
 .zju-helper-plugin {
+  margin-top: 0.75rem;
+
   .zju-helper-plugin-content {
-    margin-top: -0.75rem;
+    margin-top: -1rem;
     max-height: 400px;
     overflow-y: hidden;
     transition: max-height (@duration * 2) cubic-bezier(0, 1, 0, 1);

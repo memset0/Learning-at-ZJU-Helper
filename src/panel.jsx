@@ -1,5 +1,8 @@
 import '@ui5/webcomponents/dist/Card.js';
 import '@ui5/webcomponents/dist/CardHeader.js';
+import '@ui5/webcomponents/dist/Tag.js';
+
+import { app } from 'hyperapp';
 
 import { createElement } from './utils/dom';
 
@@ -56,11 +59,63 @@ export function initializePanel(plugins) {
     pluginInitializers[slug] = initializer;
   });
 
+  const $panelHeader = createElement(<div></div>);
+  $panel.appendChild($panelHeader);
+  function getPluginColorScheme(plugin) {
+    if (plugin.slug.startsWith('builtin-')) {
+      return 8;
+    }
+    if (plugin.namespace === '学在浙大') {
+      return 4;
+    }
+    if (plugin.namespace === '智云课堂') {
+      return 5;
+    }
+    if (plugin.namespace === 'PTA') {
+      return 6;
+    }
+    return 10;
+  }
+  const panelHeaderActions = {
+    pushLoadedPlugin:
+      (newPlugin) =>
+      ({ loadedPlugins }) => {
+        console.debug('[zju-helper] push loaded plugin', newPlugin);
+        loadedPlugins.push(newPlugin);
+        return { loadedPlugins };
+      },
+  };
+  app({
+    node: $panelHeader,
+    init: { loadedPlugins: [] },
+    actions: panelHeaderActions,
+    view: ({ loadedPlugins }) => (
+      <ui5-card>
+        <div class="zju-helper-panel-header">
+          <div class="zju-helper-panel-header-title">学在浙大/智云课堂小助手</div>
+          <div class="zju-helper-loaded-plugins-slogen">
+            当前共加载 {loadedPlugins.length} 个插件{JSON.stringify(loadedPlugins)}
+          </div>
+          <div class="zju-helper-loaded-plugins">
+            {loadedPlugins.map((plugin) => (
+              <span class="zju-helper-loaded-plugin-tag">
+                <ui5-tag design="Set2" color-scheme={getPluginColorScheme(plugin)}>
+                  {plugin.slug}
+                </ui5-tag>
+              </span>
+            ))}
+          </div>
+        </div>
+      </ui5-card>
+    ),
+  });
+
   return {
     element: $panel,
     show: showPanel,
     hide: hidePanel,
     toggle: togglePanel,
     pluginInitializers,
+    pushLoadedPlugin: panelHeaderActions.pushLoadedPlugin,
   };
 }
