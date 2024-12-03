@@ -1,9 +1,9 @@
-import { initializePanel } from './panel.js';
+import { initializePanel } from './panel';
 
-import logger from './utils/logger.js';
-import { isVideoPage } from './utils/checker.js';
-import { copyToClipboard } from './utils/browser.js';
-import { sleep, matchRoute } from './utils/global.js';
+import logger from './utils/logger';
+import { isVideoPage } from './utils/checker';
+import { copyToClipboard } from './utils/browser';
+import { sleep, matchRoute } from './utils/global';
 
 class App {
   getNamespace() {
@@ -53,7 +53,7 @@ class App {
 
   async load() {
     // 初始化面板
-    const panel = initializePanel();
+    const panel = initializePanel(this.plugins);
 
     // 上下文管理
     const context = {
@@ -90,6 +90,7 @@ class App {
           const pluginContext = {
             ...context,
             logger: logger.extends(plugin.slug),
+            panelInitialize: panel.pluginInitializers[plugin.slug],
           };
 
           // 检测插件前置列表
@@ -171,6 +172,9 @@ class App {
     } else {
       logger.info('插件加载完成!');
     }
+
+    // 设置加载完成，不显示 busy-indicator
+    panel.element.classList.add('zju-helper-loaded');
   }
 
   safe_load() {

@@ -1,4 +1,5 @@
 @panel-width: 260px;
+@duration: 0.25s;
 
 .zju-helper {
   position: fixed;
@@ -6,15 +7,28 @@
   left: -@panel-width; // 初始状态隐藏在左侧
   width: @panel-width;
   height: 100vh;
-  background-color: #fff;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  transition: left @duration, opacity @duration;
   opacity: 0;
   z-index: 9999;
+
+  padding: 30px 15px;
+
+  // 毛玻璃效果
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.2);
 
   &.visible {
     left: 0;
     opacity: 1;
+  }
+}
+
+.zju-helper-busy-indicator {
+  opacity: 1;
+  transition: opacity @duration ease;
+  .zju-helper.zju-helper-loaded & {
+    opacity: 0;
   }
 }
 
@@ -25,4 +39,14 @@
   width: 20px;
   height: 100vh;
   z-index: 9998;
+}
+
+// theme overrides
+*,
+:before,
+:after {
+  --_ui5-v2-4-0_card_header_title_font_weight: bold !important;
+  --_ui5-v2-4-0_card_header_padding: 1rem 1rem 0 1rem !important;
+	--_ui5-v2-4-0_tl_li_margin_bottom: 0.625rem !important;
+	--_ui5-v2-4-0_timeline_tli_indicator_before_bottom: -0.625rem !important;
 }
