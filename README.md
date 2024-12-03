@@ -73,5 +73,5 @@ PTA 助手，提供以下功能：
 
 
 
-> 以上功能介绍基于版本 2.0.1 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
+> 以上功能介绍基于版本 2.0.2 生成，在最新版中可能发生改变，请参见 [项目仓库](https://github.com/memset0/Learning-at-ZJU-Helper)。
 
