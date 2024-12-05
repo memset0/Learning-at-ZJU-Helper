@@ -112,7 +112,7 @@ export async function load({ params, logger, panelInitialize }) {
       logger.debug('活动组件:', items);
 
       return (
-        <div>
+        <div class="score-finder-root">
           <ui5-timeline>{items}</ui5-timeline>
           {meaninglessCounter > 0 ? <div class="score-finder-meaningless-counter">还有 {meaninglessCounter} 条缺少数据的活动。</div> : null}
         </div>

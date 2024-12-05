@@ -1,4 +1,4 @@
-export const name = '视频链接解析';
+export const name = '智云回放链接解析';
 export const required = ['builtin-video-pages'];
 export const namespace = '智云课堂';
 
